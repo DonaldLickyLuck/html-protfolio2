@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>קביעת פגישה</title>
+    <link rel="stylesheet" href="style2.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>קבע פגישה לעיצוב גבות וריסים</h1>
+            <p>בחרי תאריך ושעה, ואנו נשלח לך אישור לווצאפ</p>
+        </header>
+
+        <!-- Date and Time Picker -->
+        <div id="calendar-container">
+            <h2>בחרי תאריך ושעה לפגישה</h2>
+            <input type="date" id="appointment-date" required>
+            <input type="time" id="appointment-time" required>
+            <button id="book-appointment" onclick="submitAppointment()">קבע פגישה</button>
+        </div>
+        
+        <!-- Confirmation Section -->
+        <div id="confirmation" style="display: none;">
+            <p>הפגישה נקבעה בהצלחה! אנו נשלח לך אישור לווצאפ.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 מיכל מהרי עיצוב גבות וריסים</p>
+    </footer>
+
+    <script>
+        function submitAppointment() {
+            const date = document.querySelector('#appointment-date').value;
+            const time = document.querySelector('#appointment-time').value;
+            const phoneNumber = "0543429013"; // מספר הווצאפ שלך
+
+            if (!date || !time) {
+                alert("אנא בחרי תאריך ושעה!");
+                return;
+            }
+
+            // יצירת הודעה שתשלח בווצאפ
+            const message = `אני רוצה לקבוע פגישה לעיצוב גבות וריסים בתאריך: ${date}, שעה: ${time}`;
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+            // שליחה לווצאפ
+            window.open(whatsappURL, "_blank");
+
+            // הצגת אישור שהפגישה נקבעה
+            document.querySelector('#calendar-container').style.display = 'none';
+            document.querySelector('#confirmation').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
